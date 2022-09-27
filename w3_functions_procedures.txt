@@ -1,0 +1,616 @@
+                                       Functions and Procedures 
+1.12
+import math
+
+print("**********Choose an Option:********* ");
+print("1: Area of the Circle");
+print("2: Area of the Rectangle ");
+print("3: Area of the Triangle ");
+
+
+choice = int(input(""))
+
+
+if choice==1:
+    # input circle radius
+    radius = float(input("Enter the radius of the Circle: "))
+    area = math.pi*pow(radius,2)
+    print(f"The area of the circle with radius {radius} is : {round(area,2)}")
+
+
+if choice==2:
+    width =float(input("Enter the width of the rectangle: "))
+    length = float(input("Enter the length of the rectangle: "))
+    area = width*length
+    print(f"The area of the ractangle is {round(area,2)}")
+
+
+if choice ==3:
+    a, b , c = map(float, input("Enter the 3 sides of triangle eg (12 13 14):").split())
+    s= (a+b+c)/2
+    area = math.sqrt(s*(s-a)*(s-b)*(s-c))
+    print(f"The area of the triangle is {round(area,2)}")
+
+1.2.
+def findTriplet(a1, a2, a3,
+                n1, n2, n3, sum):
+ 
+    for i in range(0 , n1):
+        for j in range(0 , n2):
+            for k in range(0 , n3):
+                if (a1[i] + a2[j] +
+                    a3[k] == sum):
+                    return True
+ 
+    return False
+ 
+a1 = [ 1 , 2 , 3 , 4 , 5 ]
+a2 = [ 2 , 3 , 6 , 1 , 2 ]
+a3 = [ 3 , 2 , 4 , 5 , 6 ]
+sum = 9
+
+n1 = len(a1)
+n2 = len(a2)
+n3 = len(a3)
+
+print("Yes") if findTriplet(a1, a2, a3,
+                            n1, n2, n3,
+                            sum) else print("No")
+1.2
+import statistics
+a = [1, 3, 4, 5, 7, 9, 2]
+x = statistics.mean(a)
+print("Mean is :", x)
+
+2.1
+import math
+def hexagonArea(s):
+	
+	return ((3 * math.sqrt(3) *
+			(s * s)) / 2);
+if __name__ == "__main__" :
+	s = 4
+	print("Area:","{0:.4f}" .
+		format(hexagonArea(s)))
+
+2.2
+ef calculate(rec1, rec2, rec3):
+    if rec1 == rec2 == rec3:
+        return abs((rec1[1]-rec1[3])) * abs(rec1[0]-rec1[2])
+    else:        
+        area1 = abs((rec1[1]-rec1[3])) * abs(rec1[0]-rec1[2])
+        area2 = abs((rec2[1]-rec2[3])) * abs(rec2[0]-rec2[2])
+        area3 = abs((rec3[1]-rec3[3])) * abs(rec3[0]-rec3[2])
+ 
+        xmin1, ymin1, xmax1, ymax1 = rec1[0], rec1[3], rec1[2], rec1[1]
+        xmin2, ymin2, xmax2, ymax2 = rec2[0], rec2[3], rec2[2], rec2[1]
+        xmin3, ymin3, xmax3, ymax3 = rec3[0], rec3[3], rec3[2], rec3[1]
+ 
+        area12 = (min(xmax1, xmax2) - max(xmin1, xmin2)) * (min(ymax1, ymax2) - max(ymin1, ymin2))
+        area13 = (min(xmax1, xmax3) - max(xmin1, xmin3)) * (min(ymax1, ymax3) - max(ymin1, ymin3))
+        area23 = (min(xmax2, xmax3) - max(xmin2, xmin3)) * (min(ymax2, ymax3) - max(ymin2, ymin3))
+        
+        return (area1 + area2 + area3) - (area12 + area13 + area23)
+3.1
+from math import sqrt
+print("Input lengths of shorter triangle sides:")
+a = float(input("a: "))
+b = float(input("b: "))
+c = sqrt(a**2 + b**2)
+print("The length of the hypotenuse is:", c )
+
+
+3.2
+my_str = "Hello my name is Aruzhan, I am a student"
+
+# To take input from the user
+#my_str = input("Enter a string: ")
+
+# breakdown the string into a list of words
+words = [word.lower() for word in my_str.split()]
+
+# sort the list
+words.sort()
+
+# display the sorted words
+
+print("The sorted words are:")
+for word in words:
+   print(word)
+
+4.1
+from math import floor
+def gcd(a, b):
+    if (a == 0):
+        return b
+    elif (b == 0):
+        return a
+    if (a < b):
+        return gcd(a, b % a)
+    else:
+        return gcd(b, a % b)
+def decimalToFraction(number):
+  
+    intVal = floor(number)
+    fVal = number - intVal
+    pVal = 1000000000
+    gcdVal = gcd(round(fVal * pVal), pVa
+    num= round(fVal * pVal) // gcdVal
+    deno = pVal // gcdVal
+    print((intVal * deno) + num, "/", deno)
+if __name__ == '__main__':
+    N = 4.5
+    decimalToFraction(N)
+4.2
+
+import math
+
+def preprocess(p, x, y, n):
+	for i in range(n):
+		p[i] = x[i] * x[i] + y[i] * y[i]
+
+	p.sort()
+
+def query(p, n, rad):
+	start = 0
+	end = n - 1
+	while ((end - start) > 1):
+		mid = (start + end) // 2
+		tp = math.sqrt(p[mid])
+
+		if (tp > (rad * 1.0)):
+			end = mid - 1
+		else:
+			start = mid
+	tp1 = math.sqrt(p[start])
+	tp2 = math.sqrt(p[end])
+
+	if (tp1 > (rad * 1.0)):
+		return 0
+	else if (tp2 <= (rad * 1.0)):
+		return end + 1
+	else:
+		return start + 1
+if __name__ == "__main__":
+	x = [ 1, 2, 3, -1, 4 ]
+	y = [ 1, 2, 3, -1, 4 ]
+	n = len(x)
+	p = [0] * n
+	preprocess(p, x, y, n)
+	print(query(p, n, 3))
+	print(query(p, n, 32))
+
+5.1
+import math
+import numpy
+def substract(lst):
+    list_new1 = list(map(int, arr[0].split('/')))
+    list_new2 = list(map(int, arr[1].split('/')))
+    result = [((numpy.lcm(list_new1[1], list_new2[1]) / list_new1[1]) * list_new1[0]) - (
+            (numpy.lcm(list_new1[1], list_new2[1]) / list_new2[1]) * list_new2[0]),
+              numpy.lcm(list_new1[1], list_new2[1])]
+
+    if (result[0] == 0):
+        print(result[0])
+    else:
+        print(result[0], "/", result[1])
+
+def reduceF(lst):
+    divider, x, y = gcdEuclid(lst[0], lst[1])
+    return [i / divider for i in lst]
+
+def gcdEuclid(a, b):
+    if a == 0:
+        return b, 0, 1
+
+    gcd, x1, y1 = gcdEuclid(b % a, a)
+    x = y1 - (b // a) * x1
+    y = x1
+
+    return gcd, x, y
+
+
+arr = []
+for i in range(2):
+    arr.append(input("enter the fraction n" + str(i + 1) + ": "))
+substract(arr)
+
+5.2
+def allDiv(n):
+    for i in range(1,n-1):
+        if n %i == 0:
+            print(i,end=" ")
+n = int(input("numb: "))
+allDiv(n)
+
+6.1
+def gcdEuclid(a, b):
+    if a == 0:
+        return b, 0, 1
+
+    gcd, x1, y1 = gcdEuclid(b % a, a)
+    x = y1 - (b // a) * x1
+    y = x1
+
+    return gcd, x, y
+
+
+def lcm(a, b):
+    gcd, x, y = gcdEuclid(a, b)
+    return (a * b) / gcd
+
+
+a, b = list(map(int, input("enter a,b: ").split()))
+gcd, x, y = gcdEuclid(a, b)
+print("GCD is:", gcd)
+print("LCM is:", lcm(a, b))
+
+6.2
+import math
+def quadrilateralArea(lst, diagonal):
+    h1 = 2 * (areaTriangle(lst[0], lst[1], diagonal) / diagonal)
+    h2 = 2 * (areaTriangle(lst[2], lst[3], diagonal) / diagonal)
+    area = 0.5 * diagonal * (h1 + h2)
+    return area
+def areaTriangle(a, b, c):
+    s = (a + b + c) / 2
+    area = math.sqrt(s * (s - a) * (s - b) * (s - c))
+    return area
+x = list(map(float, input("enter 4 sides one after one: ").split()))
+d = float(input("enter the diagonal: "))
+print("area of quadrilateral: ", quadrilateralArea(x, d))
+
+
+7.1
+import math
+
+
+def quadrilateralArea(lst):
+    s = (lst[0] + lst[1] + lst[2] + lst[3]) / 2
+    area = math.sqrt(((s - lst[0]) * (s - lst[1]) * (s - lst[2]) * (s - lst[3])) - (
+                lst[0] * lst[1] * lst[2] * lst[3] * math.pow(math.cos(math.pi / 2), 2)))
+    return area
+
+
+x = list(map(int, input("enter 4 sides one after one: ").split()))
+print("area of quadrilateral: ", quadrilateralArea(x))
+
+7.2
+
+n = int(input("enter the numb: "))
+print("The Octal representation of", n, "is " + oct(n))
+
+8.1
+def divisible(n):
+    for i in range(n):
+        if allDigitsDivide(i) == True:
+            print(i)
+
+
+def allDigitsDivide(n):
+    temp = n
+    while (temp > 0):
+
+        digit = temp % 10
+        if ((digit != 0 and n % digit == 0) == False):
+            return False
+
+        temp = temp // 10
+
+    return True
+
+
+n = int(input("enter the numb: "))
+divisible(n)
+
+8.2
+def swap(lst):
+    lst[0],lst[len(lst)-1] = lst[len(lst)-1],lst[0]
+    return lst
+input("the length of array: ")
+list_new = list(map(int, (input("Enter the array: ")).split()))
+print("original array: ",list_new)
+print("swapped: ",swap(list_new))
+
+9.1
+def getSum(n):
+    sum = 0
+    for digit in str(n):
+        sum += int(digit)
+    return sum
+
+
+def sumComb(n, sum):
+    repeat = -1
+    while n >= 0:
+        n -= sum
+        repeat += 1
+    return repeat
+
+
+n = int(input("enter the number: "))
+sum = getSum(n)
+print(sum)
+print(sumComb(n, sum))
+
+9.2
+import statistics
+
+def multiplyList(myList):
+
+	result = 1
+	for x in myList:
+		result = result * x
+	return result
+
+
+list = [[1, 2, 3],[4, 5, 6],[7, 8, 9]]
+
+for i in range(3):
+    print("The product of the elements in",i+1," list =", multiplyList(list[i]))
+
+for i in range(3):
+    print("The arithmetic mean of ",i+1,"list =", statistics.mean(list[i]))
+
+10.1
+arr = []
+for i in range(210, 231):
+    interval.append(i)
+
+res = [sub for sub in interval if len(set(str(sub))) == len(str(sub))]
+
+print(str(res))
+
+10.2
+string = input("enter the str: ")
+s = string.split()[::-1]
+word = []
+for i in s:
+    word.append(i)
+print(" ".join(word))
+
+11.1
+def isPrime(n):
+
+    if n <= 1:
+        return False
+
+    for i in range(3, n):
+        if n % i == 0:
+            return False
+
+    return True
+
+
+def printPrime(n):
+    for i in range(n, n * 2):
+        if isPrime(i):
+            print(i, end=" ")
+
+
+n = int(input("enter the n: "))
+printPrime(n)
+
+11.2
+def findMax(lst):
+    return max(lst)
+
+
+arr = input("Enter the array: ")
+list1 = list(map(int, arr.split()))
+print("maximum of 1st list:", findMax(list1))
+
+arr = input("Enter the array: ")
+list2 = list(map(int, arr.split()))
+print("maximum of 2nd list:", findMax(list2))
+
+index1 = list1.index(findMax(list1))
+index2 = list2.index(findMax(list2))
+
+list1[index1], list2[index2] = list2[index2], list1[index1]
+
+print(list1, list2)
+
+12.1
+def findFriendly(n):
+    f = 0
+    for ch in range(n):
+        if ch != f:
+            s1 = 0
+            for i in range(1, ch // 2 + 1):
+                if ch % i == 0:
+                    s1 += i
+            s2 = 0
+            for j in range(1, s1 // 2 + 1):
+                if s1 % j == 0:
+                    s2 += j
+            if s2 == ch != s1:
+                print(ch, s1)
+                f = s1
+
+
+n = int(input("enter the numb: "))
+findFriendly(n)
+
+12.2
+import math
+
+
+def median(a, b, c):
+    median = math.sqrt(2 * (b * b + c * c) - a * a) / 2
+    return median
+
+
+print("enter 3 sides:")
+a = int(input("a = "))
+b = int(input("b = "))
+c = int(input("c = "))
+if abs(a - b) >= c | a + b <= c:
+    print("impossible triangle")
+print("medians of original triangle:")
+ma = median(a, b, c)
+mb = median(b, a, c)
+mc = median(c, a, b)
+print(ma, mb, mc)
+print("medians of created triangle:")
+mma = median(ma, mb, mc)
+mmb = median(mb, ma, mc)
+mmc = median(mc, ma, mb)
+print(mma, mmb, mmc)
+
+13.1
+def armStrong(n):
+    for num in range(1, 1000):
+
+        order = len(str(num))
+
+        sum = 0
+
+        temp = num
+        while temp > 0:
+            digit = temp % 10
+            sum += digit ** order
+            temp //= 10
+
+        if num == sum:
+            print(num)
+
+
+n = int(input("enter the n: "))
+armStrong(n)
+
+13.2
+def acos(x, y):
+    return x / ((x * x + y * y) ** 0.5)
+
+x1, x2 = map(float, input().split())
+y1, y2 = map(float, input().split())
+z1, z2 = map(float, input().split())
+
+res = [x1, x2]
+acosx = acos(x1, x2)
+acosy = acos(y1, y2)
+
+if acosy > acosx:
+    acosx = acosy
+    res = [y1, y2]
+acosz = acos(z1, z2)
+if acosz > acosx:
+    acosz = acosz
+    res = [z1, z2]
+
+print(*res)
+n = 3
+res = [tuple(map(float, input().split())) for i in range(n)]
+rcos = [acos(*res[i]) for i in range(n)]
+k = rcos.index(max(rcos))
+print(res[k])
+
+14.1
+def countDivisors(a):
+    res = []
+    i = 1
+    while i * i < a + 1:
+        if a % i == 0:
+            res.append(i)
+            if i != a // i:
+                res.append(a // i)
+        i += 1
+    return sorted(res)
+
+
+def function(m, n):
+    div = []
+    for num in range(m, n + 1):
+        frac = countDivisors(num)
+        div.append((len(frac), -num, frac[-2:]))
+    div.sort()
+    print(-div[-1][1], 'consist', div[-1][0], 'divisors')
+
+
+function(394441, 394505)
+
+14.2
+import math
+def distance(a, b):
+    d = 0
+    for i in range(2):
+        d += pow((a[i] - b[i]), 2)
+    return d
+Identify = ['X', 'Y', 'Z', 'T']
+arr = []
+print("enter the coordinates:")
+for i in range(4):
+    b = []
+    print("coordinates:", Identify[i])
+    for j in range(2):
+        b.append(int(input()))
+    arr.append(b)
+flag = True
+for i in range(2):
+    for j in range(i + 1, 4):
+        dist = distance(arr[i], arr[j])
+        if flag or max_dist < dist:
+            m1 = i
+            m2 = j
+            max_dist = dist
+            flag = False
+print(f'maximum distance from each other: {Identify[m1]} и {Identify[m2]}')
+print(f'value of this distance:  {max_dist ** 0.5:.3f}')
+
+15.1
+
+def findPrime(n):
+    array = [True for _ in range(n + 1)]
+
+    i = 1
+    while 2 * i * (i + 1) < n:
+        j = i
+        while j <= (n - i) / (2 * i + 1):
+            array[2 * i * j + i + j] = False
+            j = j + 1
+        i = i + 1
+
+    for i in range(1, n + 1):
+        elem = array[i]
+        if elem:
+            prime = 2 * i + 1
+            if prime > n: break
+            a = bin(prime)[2:]
+            b = bin(prime)[2:][::-1]
+
+            if a == b:
+                print(prime, end=' ')
+n = int(input("enter the numb: "))
+findPrime(n)
+
+15.2
+import math
+def distance(a, b):
+    d = 0
+    for i in range(3):
+        d += pow((a[i] - b[i]), 2)
+    return d
+Identify = ['X', 'Y', 'Z', 'T']
+arr = []
+print("enter the coordinates:")
+for i in range(4):
+    b = []
+    print("coordinates:", Identify[i])
+    for j in range(3):
+        b.append(int(input()))
+    arr.append(b)
+flag = True
+for i in range(3):
+    for j in range(i + 1, 4):
+        dist = distance(arr[i], arr[j])
+        if flag or min_dist > dist:
+            m1 = i
+            m2 = j
+            min_dist = dist
+            flag = False
+print(f'minimal distance from each other: {Identify[m1]} и {Identify[m2]}')
+print(f'value of this distance:  {min_dist ** 0.5:.3f}')
+
+
+ 
